@@ -1,8 +1,4 @@
 
-
-// Initialize Firebase
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAIWuuZn5ciMHp369rKXK2aN1z3mLuZtA8",
@@ -18,21 +14,17 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// var trainName = "";
-// var destination = "";
-// var firstTrainTime = '';
-// var frequency = 0;
-// var nextArrival = 0;
-// var minutesAway = 0;
-
+// create click event from form and capture user input
 $("#enterTrain").on("click", function (event) {
     event.preventDefault();
-// to do - fix time formatting
+
     var trainName = $("#train-name").val().trim();
     var destination = $("#destination").val().trim();
-    var firstTrainTime = moment($("#first-train").val().trim(), "DD/MM/YY").format("X");
+    var firstTrainTime = moment($("#first-train").val().trim(), "h:mm").format("X");
+    console.log('firstTrainTime', firstTrainTime)
     var frequency = $("#frequency").val().trim();
 
+// write user input to firebase 
     var newEntry = {
         trainName: trainName,
         destination: destination,
@@ -43,35 +35,64 @@ $("#enterTrain").on("click", function (event) {
     database.ref().push(newEntry);
     console.log('newEntry', newEntry.trainName)
 
+
     $("#train-name").val("");
     $("#destination").val("");
     $("#first-train").val("");
     $("#frequency").val("");
 });
 
-
+// create event to update html when child is added
 database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
     console.log(childSnapshot.val());
 
-    // Store everything into a variable.
-    // var trainName = childSnapshot.val().trainName;
-    // var destination = childSnapshot.val().destination;
-    // var firstTrainTime = childSnapshot.val().firstTrainTime;
-    // var frequency = childSnapshot.val().frequency;
 
+    var trainName = childSnapshot.val().trainName;
+    var destination = childSnapshot.val().destination;
+    var firstTrainTime = childSnapshot.val().firstTrainTime;
+    var frequency = childSnapshot.val().frequency;
+
+    //time calculator:
+    var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
+    console.log('firstTimeConverted', firstTimeConverted)
+
+
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+
+    var tRemainder = diffTime % frequency;
+    console.log(tRemainder);
+
+
+    var tMinutesTillTrain = frequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("h:mm a"));
+
+
+
+
+    // function to write to html in train schedule table
     var createRow = function () {
 
         var tBody = $("tbody");
         var tRow = $("<tr>");
 
 
-        var trainName = $("<td>").text(childSnapshot.val().trainName);
-        var destination = $("<td>").text(childSnapshot.val().destination);
+        trainName = $("<td>").text(childSnapshot.val().trainName);
+        destination = $("<td>").text(childSnapshot.val().destination);
         // var firstTrainTime = $("<td>").text(childSnapshot.val().firstTrainTime);
-        var frequency = $("<td>").text(childSnapshot.val().frequency);
-        var nextArrival = $("<td>").text(0);
-        var minutesAway = $("<td>").text(0);
+        frequency = $("<td>").text(childSnapshot.val().frequency);
+        var nextArrival = $("<td>").text(moment(nextTrain).format("h:mm a"));
+        var minutesAway = $("<td>").text(tMinutesTillTrain);
 
         tRow.append(trainName, destination, frequency, nextArrival, minutesAway);
 

@@ -5,19 +5,54 @@ body {
     
   }
 
-.row {
+.col {
     border: 2px solid black;
     margin-bottom:20px;
+    border-radius: 8px;
 
 
 }
 
 #header {
-    background: rgb(74, 74, 114);
+    background: rgb(27, 51, 25);
     color: white;
     padding:10px;
+    border-radius: 7px;
 }
 
 #inputDiv {
-    padding: 10px;
+    padding-bottom: 10px;
+    
 }
+
+#enterTrain {
+    background: rgb(27, 51, 25);
+    border: 2px solid rgb(27, 51, 25);
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+}
+
+th {
+    font-size: 17px;
+    font-weight: bold;   
+}
+
+.form-group {
+    font-weight: bold;
+}
+
+h3 {
+   margin-left: 10px; 
+    
+}
+
+#inputDivTitle {
+    background: rgb(27, 51, 25);
+    color: white;
+    padding: 5px;
+    margin-bottom: 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
