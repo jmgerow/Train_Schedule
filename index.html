@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Train Schedule</title>
+    <link rel="stylesheet" type="text/css" href="assets/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div id="header" class="col-md-12 text-center">
+                <h1>Train Schedule</h1>
+                <h2>Building a new train schedule</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="displayResults" class="col">
+                <h3>Current Train Schedule</h3>
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="inputDiv" class="col">
+                <h3>Add Train</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="train-time">Train Name</label>
+                        <input type="text" class="form-control" id="train-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" class="form-control" id="destination">
+                    </div>
+                    <div class="form-group">
+                        <label for="first-train">First Train Time (hh:mm - military time)</label>
+                        <input type="text" class="form-control" id="first-train">
+                    </div>
+                    <div class="form-group">
+                        <label for="frequency">Frequency (min)</label>
+                        <input type="text" class="form-control" id="frequency">
+                    </div>
+                    <input id="enterTrain" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+<script type="text/javascript" src="assets/script.js"></script>
+
+</body>
+
+</html>

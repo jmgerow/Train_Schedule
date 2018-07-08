@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    
+  }
+
+.row {
+    border: 2px solid black;
+    margin-bottom:20px;
+
+
+}
+
+#header {
+    background: rgb(74, 74, 114);
+    color: white;
+    padding:10px;
+}
+
+#inputDiv {
+    padding: 10px;
+}
